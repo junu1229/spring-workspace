@@ -28,7 +28,7 @@ public class MemberController {
 	public String find(String keyword, Model model) {
 		List<Member> list = null;
 		list = service.find(keyword);
-		if(list.size()!=0) {
+		if(list.size()>0) {
 			model.addAttribute("list", list);
 			return "find_ok";
 		}

@@ -28,14 +28,13 @@
 	 	FROM MEMBER
 	 	<if test="String!=null">
 	 	WHERE ID LIKE '%'||#{String}||'%'
-        OR PASSWORD LIKE '%'||#{String}||'%'
         OR NAME LIKE '%'||#{String}||'%'
         OR ADDRESS LIKE '%'||#{String}||'%'
 	 	</if>
 	 </select>
 	 
 	  <update id="updateMember" parameterType="Member">
-	 	UPDATE member
+	 	UPDATE MEMBER
 	 	<trim prefix="SET" suffixOverrides=",">
 	 		<if test="pwd!=null">
 	 			PASSWORD=#{pwd},

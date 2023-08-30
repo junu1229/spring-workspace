@@ -28,8 +28,8 @@ public class MemberDAO {
 	public List<Member> find(String keyword) {
 		return sqlsession.selectList("memberMapper.find", keyword);
 	}
-	public int updateMember(Member member) {
-		return sqlsession.update("memberMapper.updateMember", member);
+	public int updateMember(Member vo) {
+		return sqlsession.update("memberMapper.updateMember", vo);
 	}
 	
 	/*

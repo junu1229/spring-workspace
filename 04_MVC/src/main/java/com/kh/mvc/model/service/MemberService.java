@@ -26,8 +26,8 @@ public class MemberService {
 	public List<Member> find(String keyword) {
 		return dao.find(keyword);
 	}
-	public int updateMember(Member member) {
-		return dao.updateMember(member);
+	public int updateMember(Member vo) {
+		return dao.updateMember(vo);
 	}
 	
 	
