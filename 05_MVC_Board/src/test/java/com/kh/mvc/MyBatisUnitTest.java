@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.mvc.model.vo.Board;
+import com.kh.mvc.model.vo.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -90,16 +91,12 @@ public class MyBatisUnitTest {
 	@Test
 	public void deleteTest() {
 		SqlSession session = getSession();
-		Board board = new Board();
-		board.setTitle("test");
-		board.setContent("test");
-		board.setWriter("test");
-		board.setNo(1);
-		int result = session.delete("board.delete", board);
+		int result = session.delete("board.delete", 2);
 		if(result > 0) {
 			System.out.println(result + "개 게시글 삭제!");
 			session.commit();
 		}
 		System.out.println("==========================================");
 	}
+	
 }

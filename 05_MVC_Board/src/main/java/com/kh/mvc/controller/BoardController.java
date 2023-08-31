@@ -1,5 +1,6 @@
 package com.kh.mvc.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mvc.model.service.BoardService;
 import com.kh.mvc.model.vo.Board;
+import com.kh.mvc.model.vo.Criteria;
+import com.kh.mvc.model.vo.Paging;
 
 @Controller
 @RequestMapping("/board/*")
@@ -31,19 +34,42 @@ public class BoardController {
 //	}
 //	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@GetMapping("/list")
-	public void list(Model model) {
-		List<Board> list = service.selectAllBoard();
+	public void list(Model model, Criteria cri) {
+		List<Board> list = service.selectAllBoard(cri);
 		model.addAttribute("list", list);
+		model.addAttribute("paging", new Paging(cri, service.getTotal()));
 	}
 	
-	@PostMapping
-	@PutMapping
-	@DeleteMapping
+//	@PostMapping
+//	@PutMapping
+//	@DeleteMapping
 	
-	@RequestMapping("/insert")
-	public ModelAndView insert(Board board) {
+	@PostMapping("/insert")
+	public String insert(Board board) {
 		int result = service.insertBoard(board);
-		return new ModelAndView("/list");
+		return "redirect:/board/list";
+	}
+	@GetMapping("/insert")
+	public void insert() {
+		
+	}
+	
+	@GetMapping("/view") 
+	public void view(int no, Model model){
+		Board board = service.selectBoard(no);
+		model.addAttribute("board", board);
+	}
+	
+	@PostMapping("/update")
+	public String update(Board board) {
+		service.updateBoard(board);
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/delete") 
+	public String delete(int no){
+		service.deleteBoard(no);
+		return "redirect:/board/list";
 	}
 	
 }

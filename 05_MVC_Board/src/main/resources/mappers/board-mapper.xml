@@ -7,31 +7,34 @@
 	</insert>
 	
 	<select id="selectAll" resultType="Board">
-		SELECT NO, TITLE, CONTENT, WRITER, REGDATE 
-		FROM BOARD
+		<![CDATA[
+	SELECT NUM, NO, TITLE, WRITER, REGDATE
+	FROM (SELECT /*+ INDEX_DESC(board PK_BOARD) */
+    	  ROWNUM NUM, NO, TITLE, WRITER, REGDATE
+     	  FROM board
+      	  WHERE ROWNUM <= #{page} * #{amount})
+	WHERE NUM > (#{page}-1) * #{amount}
+	]]>
 	</select>
 	
-	<select id="select" parameterType="String" resultType="Board">
-		SELECT NO, TITLE, CONTENT, WRITER, REGDATE 
-		FROM BOARD
-		<if test="String != null">
-			WHERE TITLE LIKE '%'||#{String}||'%'
-			OR CONTENT LIKE '%'||#{String}||'%'
-			OR WRITER LIKE '%'||#{String}||'%'
-		</if>
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	<select id="select" parameterType="int" resultType="Board">
+		SELECT * FROM BOARD WHERE NO = #{no}
 	</select>
 	
 	<update id="update" parameterType="Board">
 		UPDATE BOARD
 		SET
 		TITLE = #{title},
-		CONTENT = #{content},
-		REGDATE = SYSDATE
-		WHERE WRITER = #{writer} AND NO = #{no}
+		CONTENT = #{content}
+		WHERE NO = #{no}
 	</update>
 	
-	<delete id="delete" parameterType="Board">
-		DELETE FROM BOARD WHERE NO = #{no} AND WRITER = #{writer}
+	<delete id="delete" parameterType="int">
+		DELETE FROM BOARD WHERE NO = #{no}
 	</delete>
 	
 </mapper>
