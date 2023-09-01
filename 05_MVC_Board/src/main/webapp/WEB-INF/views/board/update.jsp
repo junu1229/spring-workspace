@@ -22,15 +22,17 @@
 </head>
 <body>
 	<div class="container">
-        <h1>게시글 등록</h1>
-        <form action="/board/insert" method="post" enctype="multipart/form-data">
+        <h1>게시글 수정</h1>
+        <form action="/board/update" method="post" enctype="multipart/form-data">
+        	<input type="hidden" name="url" value="${board.url}"/>
+        	<input type="hidden" name="no" id="no" value="${board.no}">
             <div class="form-group">
                 <label for="title">title</label>
-                <input type="text" name="title" id="title" class="form-control"/>
+                <input type="text" name="title" id="title" class="form-control" value="${board.title}"/>
             </div>
             <div class="form-group">
                 <label for="content">content</label>
-                <textarea name="content" id="content" cols="30" rows="10" class="form-control" style="resize: none;"></textarea>
+                <textarea name="content" id="content" cols="30" rows="10" class="form-control" style="resize: none;">${board.content}</textarea>
             </div>
             <div class="form-group">
             	<label for="uploadFile">Add File</label>
@@ -38,9 +40,9 @@
             </div>
             <div class="form-group">
                 <label for="writer">writer</label>
-                <input type="text" id="writer" name="writer" class="form-control">
+                <input type="text" id="writer" name="writer" class="form-control" value="${board.writer}" readonly>
             </div>
-            <button type="submit" class="btn btn-outline-warning">등록</button>
+            <button type="submit" class="btn btn-outline-warning">수정</button>
         </form>
     </div>
 </body>
