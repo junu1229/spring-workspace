@@ -1,3 +1,4 @@
+DROP TABLE MEMBER;
 CREATE TABLE MEMBER(
     ID VARCHAR2(100) PRIMARY KEY,
     PASSWORD VARCHAR2(150) NOT NULL,
@@ -51,3 +52,15 @@ COMMIT;
 SELECT * FROM BOARD WHERE NO = 17421;
 ALTER TABLE BOARD ADD CONSTRAINT PK_BOARD PRIMARY KEY(NO);
 ALTER TABLE board ADD url VARCHAR(200);
+
+drop table member;
+create table member(
+    id varchar2(50) primary key,
+    password varchar2(100) not null,
+    name varchar2(50) not null,
+    address varchar2(200),
+    auth varchar2(50) default 'ROLE_MEMBER' not null,
+    enabled number(1) default 1 not null
+);
+
+SELECT * FROM MEMBER;
