@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="phoneMapper">
+
+	<insert id="insert">
+		INSERT INTO PHONE VALUES(#{num}, #{model}, #{price}, #{vcode})
+	</insert>
+	
+	<select id="select" parameterType="phone" resultMap="phone" >
+		SELECT * FROM PHONE
+		<if test="no != null">
+			WHERE NO = #{no}
+		</if>
+		</select>
+	<!-- dynamic query -->
+	<delete id="delete"></delete>
+	
+	<update id="update"></update>
+	
+	<!-- dynamic -->
+	<select id="selectUser"></select>
+
+</mapper>
