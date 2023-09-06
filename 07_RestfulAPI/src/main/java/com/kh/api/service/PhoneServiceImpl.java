@@ -17,19 +17,22 @@ public class PhoneServiceImpl implements PhoneService{
 
 	@Override
 	public int insert(Phone phone) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.insert(phone);
 	}
 
 	@Override
-	public int delete(List<String> list) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Phone phone) {
+		return dao.update(phone);
 	}
 
 	@Override
-	public Phone select(Phone phone) {
-		return dao.select(phone);
+	public int delete(String num) {
+		return dao.delete(num);
+	}
+
+	@Override
+	public Phone select(String num) {
+		return dao.select(num);
 	}
 
 	@Override
@@ -39,8 +42,8 @@ public class PhoneServiceImpl implements PhoneService{
 
 	@Override
 	public Userinfo select(Userinfo userinfo) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.select(userinfo);
 	}
+
 
 }

@@ -6,7 +6,9 @@
 	</settings>
 	
 	<typeAliases>
-		<package name="com.kh.api.model"/>
+		<typeAlias type="com.kh.api.model.Phone" alias="Phone"/>
+		<typeAlias type="com.kh.api.model.Company" alias="Company"/>
+		<typeAlias type="com.kh.api.model.Userinfo" alias="Userinfo"/>
 	</typeAliases>
 	
 	<mappers>

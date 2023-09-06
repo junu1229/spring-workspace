@@ -1,24 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="phoneMapper">
+<mapper namespace="phone">
 
-	<insert id="insert">
+	<insert id="insert" parameterType="Phone">
 		INSERT INTO PHONE VALUES(#{num}, #{model}, #{price}, #{vcode})
 	</insert>
 	
-	<select id="select" parameterType="phone" resultMap="phone" >
+	<resultMap type="phone" id="phoneWithCompany">
+		<id column="num" property="num"/>
+		<result column="model" property="model"/>
+		<result column="price" property="price"/>
+		<result column="vcode" property="vcode"/>
+		<association property="company" javaType="company">
+			<id column="vcode" property="vcode"/>
+			<result column="vendor" property="vendor"/>
+		</association>
+	</resultMap>
+	
+	<select id="select" parameterType="Phone" resultMap="phoneWithCompany" >
 		SELECT * FROM PHONE
-		<if test="no != null">
-			WHERE NO = #{no}
+		JOIN COMPANY USING(VCODE)
+		<if test="num != null">
+			WHERE NUM = #{num}
 		</if>
 		</select>
 	<!-- dynamic query -->
-	<delete id="delete"></delete>
+	<delete id="delete" parameterType="String">
+		DELETE FROM PHONE WHERE NUM = #{num}
+	</delete>
 	
-	<update id="update"></update>
+	<update id="update" parameterType="phone">
+		UPDATE PHONE
+		SET MODEL=#{model}, PRICE=#{price}, VCODE=#{vcode}
+		WHERE NUM=#{num}
+	</update>
 	
 	<!-- dynamic -->
-	<select id="selectUser"></select>
+	<select id="selectUser" parameterType="userinfo" resultType="userinfo">
+		SELECT id, pw
+		FROM userinfo
+		WHERE ID=#{id}
+		<if test="pw!=null">
+			AND PW=#{pw}
+		</if>
+	</select>
 
 </mapper>

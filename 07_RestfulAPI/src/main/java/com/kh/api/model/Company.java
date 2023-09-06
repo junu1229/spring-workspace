@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Company {
 	private String vcode;
-	private String vendorString;
+	private String vendor;
 }

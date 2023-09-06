@@ -16,29 +16,32 @@ public class PhoneDAOImpl implements PhoneDAO{
 
 	@Override
 	public int insert(Phone phone) {
-		return 0;
+		return session.insert("phone.insert", phone);
 	}
 
 	@Override
-	public int delete(List<String> list) {
-		return 0;
-	}
-
-	@Override
-	public Phone select(Phone phone) {
-		// TODO Auto-generated method stub
-		return null;
+	public Phone select(String num) {
+		return (Phone) session.selectList("phone.select", num).get(0);
 	}
 
 	@Override
 	public List<Phone> select() {
-		return session.selectList("phoneMapper.select");
+		return session.selectList("phone.select", null);
 	}
 
 	@Override
 	public Userinfo select(Userinfo userinfo) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("phone.selectUser", userinfo);
+	}
+
+	@Override
+	public int update(Phone phone) {
+		return session.update("phone.update", phone);
+	}
+
+	@Override
+	public int delete(String num) {
+		return session.delete("phone.delete", num);
 	}
 
 }
