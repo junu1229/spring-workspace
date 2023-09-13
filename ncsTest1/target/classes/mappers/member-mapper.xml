@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "unknown.dtd">
+<mapper>
+	<resultMap id="memberResultSet">
+	</resultMap>
+	
+	<select id="loginMember" 받는값="Member" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
+	</select>
+</mapper>
